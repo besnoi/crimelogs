@@ -1,0 +1,171 @@
+
+.padding-left211 {
+    padding-left: 211px !important;
+}
+      select#inputGroupSelect04 {
+    width: 400px;
+}
+table#dtBasicExample {
+    margin-top: 30px;
+}
+button.btn.btn-search {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background: #4285f4;
+    color: #fff;
+    margin-left: -1px;
+}
+.sidepanel {
+    background: #007bff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9;
+}
+.sidepanel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidepanel ul a {
+    color: #fff;
+    padding: 20px 50px;
+    display: block;
+    font-weight: bold;
+}
+.sidepanel ul a:hover {
+    background: #ff9900;
+    text-decoration: none;
+}
+.sidepanel img {
+    width: 78px;
+}
+.sidepanel img {
+    width: 199px;
+}
+#dtBasicExample tbody tr {
+    cursor: pointer;
+}
+#dtBasicExample tbody tr:hover {
+    background: #ffff67;
+}
+.pageheading {
+    background: #007bff;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin: -15px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+button.togglepanel {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 40px;
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    cursor: pointer;
+    display: none;
+}
+a.closepanel {
+    background: crimson;
+    display: none !important;
+}
+#slidecaption{
+    width: 300px;
+  }
+  #slidecaption {
+       -webkit-animation-name: spinner; 
+      -webkit-animation-timing-function: linear; 
+      -webkit-animation-iteration-count: infinite; 
+      -webkit-animation-duration: 2s; 
+      animation-name: spinner; 
+      animation-timing-function: linear; 
+      animation-iteration-count: infinite; 
+      animation-duration: 2s; 
+      -webkit-transform-style: preserve-3d; 
+      -moz-transform-style: preserve-3d; 
+      -ms-transform-style: preserve-3d; 
+      transform-style: preserve-3d;
+  }
+  
+    /* WebKit and Opera browsers */ @-webkit-keyframes spinner { 
+      from 
+      { 
+          -webkit-transform: rotateY(0deg); 
+      } 
+      to { 
+          -webkit-transform: rotateY(-360deg); 
+      } 
+  } /* all other browsers */ 
+  @keyframes spinner { 
+      from { 
+          -moz-transform: rotateY(0deg); 
+          -ms-transform: rotateY(0deg); 
+          transform: rotateY(0deg); 
+      } 
+      to 
+      { 
+          -moz-transform: rotateY(-360deg); 
+          -ms-transform: rotateY(-360deg); 
+          transform: rotateY(-360deg); 
+      
+      } 
+  }
+.loginpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    width: 500px;
+    margin: auto;
+}
+.loginform {
+    margin-top: 0px;
+}
+.loginpage-outer {
+    height: 100vh;
+    background: #efefef;
+    display: flex;
+}
+.loginpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    border-top: 5px solid #007bff;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    box-shadow: 0px 8px 16px #e2e2e2;
+}
+body > .alert {
+    margin-left: 199px;
+    margin-right: 0px;
+    margin-top: 10px;
+}
+@media (max-width: 800px){
+    .sidepanel{
+        display: none;
+    }
+    .padding-left211 {
+        padding-left: 0 !important;
+    }
+    button.togglepanel, a.closepanel{
+        display: block !important;
+    }
+    select#inputGroupSelect04 {
+        width: 200px;
+    }
+}
