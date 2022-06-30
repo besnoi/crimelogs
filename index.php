@@ -2,13 +2,13 @@
 // Start the session
 session_start();
 if(!$_SESSION['loggedIn']){
-  header('Location: /form/login.php');
+  header('Location: /crimelogs/login.php');
 }
 include('conn.php');
 
-if(isset($_POST['userform'])){
+if(isset($_POST['criminalform'])){
 
-
+echo "WORKING";
   $firstname = $_POST['firstname'];
   $lastname = $_POST['lastname'];
   $bankno = $_POST['bankno'];
@@ -22,16 +22,20 @@ if(isset($_POST['userform'])){
   $crime_year = $_POST['crime_year'];
   $registration_date = $_POST['registration_date'];
 
-  $sql = "INSERT INTO user (name, surname, bankacc, mobbank, mobno, email, address, panno, adhaar, userid, crime_number, crime_year, registration_date) 
+  $sql = "INSERT INTO criminal (name, surname, bankacc, mobbank, mobno, email, address, panno, adhaar, criminalid, crime_number, crime_year, registration_date) 
 VALUES ('$firstname', '$lastname', '$bankno', '$bankmob', '$mobno', '$email', '$address', '$panno', '$aadhar', 0, '$crime_number', '$crime_year', '$registration_date')";
 
-
+if ($conn->query($sql) === TRUE) {
+      echo '<div class="alert alert-success" role="alert">Record Added Successfully</div>';
+    } else {
+      echo "<div class='alert alert-danger'>Error: " . $sql . "<br>" . $conn->error."</div>";
+    }
 
 }
 
-$userdata_query = "SELECT * FROM user";
+$criminaldata_query = "SELECT * FROM criminal";
 
-$userdata = $conn->query($userdata_query);
+$criminaldata = $conn->query($criminaldata_query);
 
 
 ?>
@@ -42,7 +46,7 @@ $userdata = $conn->query($userdata_query);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Form</title>
+    <title>Add Entry - CrimeLogs</title>
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
@@ -74,11 +78,11 @@ $userdata = $conn->query($userdata_query);
   </head>
   <body>
     <div class="sidepanel">
-      <img src="https://i.pinimg.com/originals/51/ea/39/51ea39531ba05d624b256c80099a4b95.png" />
+      <img src="mahapol.png" />
       <ul>
-        <li><a href="/form">Add Entry</a></li>
-        <li><a href="/form/search.php?term=1">Search Entry</a></li>
-        <li><a href="/form/logout.php">Log Out</a></li>
+        <li><a href="/crimelogs"><i class="fa fa-address-book"></i> Add Entry</a></li>
+        <li><a href="/crimelogs/search.php?term=1"><i class="fa fa-search"></i> Search Entry</a></li>
+        <li><a href="/crimelogs/logout.php"><i class="fa fa-times-circle"></i> Log Out</a></li>
         <li><a href="#" class="closepanel">Close &times;</a></li>
       </ul>
     </div>
@@ -165,7 +169,7 @@ $userdata = $conn->query($userdata_query);
       </div>
       <div class="form-group row">
         <div class="offset-4 col-8">
-          <input name="userform" type="submit" class="btn btn-primary" value="Submit">
+          <input name="criminalform" type="submit" class="btn btn-primary" value="Submit">
         </div>
       </div>
     </form>

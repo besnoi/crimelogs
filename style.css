@@ -43,7 +43,7 @@ button.btn.btn-search {
     width: 78px;
 }
 .sidepanel img {
-    width: 199px;
+    width: 200px;
 }
 #dtBasicExample tbody tr {
     cursor: pointer;
@@ -168,4 +168,19 @@ body > .alert {
     select#inputGroupSelect04 {
         width: 200px;
     }
+}
+
+.sidepanel  ul li a i {
+    font-size: larger;
+    margin-left: -25px;
+    padding-right: 6px;
+}
+
+.sidepanel ul li {
+    border-bottom: 1px solid #ffffff41;
+}
+
+table.table-sm th, table.table-sm td {
+    vertical-align: middle;
+    text-align: center;
 }

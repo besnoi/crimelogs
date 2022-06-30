@@ -7,7 +7,7 @@ session_start();
 
 <?php
 session_destroy();
-header('Location: /form/login.php');
+header('Location: /crimelogs/login.php');
 
 ?>
 

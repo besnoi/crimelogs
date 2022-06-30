@@ -12,7 +12,7 @@ if (isset($_POST['pass'])){
     }
 }
 if(isset($_SESSION['loggedIn'])){
-    header('Location: /form/index.php');
+    header('Location: /crimelogs/index.php');
 }
 ?>
 
@@ -22,7 +22,7 @@ if(isset($_SESSION['loggedIn'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Authority Login - CrimeLogs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="style.css" rel="stylesheet" />
@@ -33,7 +33,7 @@ if(isset($_SESSION['loggedIn'])){
 <div class="loginpage-outer">
     <div class="loginpage">
         <div class="logo-holder">
-            <img id="slidecaption" src="https://mumbaimirror.indiatimes.com/photo/75705626.cms" />
+            <img id="slidecaption" src="mahapol.cms" />
         </div>
         <?php if($error){echo "<div class='alert alert-danger mt-3 d-block w-100'>Wrong Password.</div>";}?>
         <div class="input-group loginform">

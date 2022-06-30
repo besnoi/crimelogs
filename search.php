@@ -2,7 +2,7 @@
 // Start the session
 session_start();
 if(!$_SESSION['loggedIn']){
-  header('Location: /form/login.php');
+  header('Location: /crimelogs/login.php');
 }
 include('conn.php');
 
@@ -12,27 +12,27 @@ if (isset($_GET['entry']))
 $pageno = 1;
 
 
- $RECORDS_PER_PAGE = 10;
+ $RECORDS_PER_PAGE = 7;
  
 
  if  (isset($_GET["term"])&&isset($_GET["query"])){
   $term = $_GET["term"];$query = $_GET["query"];
-  $totalrecordsSQL = "SELECT * FROM user WHERE $term LIKE '%$query%'";
+  $totalrecordsSQL = "SELECT * FROM criminal WHERE $term LIKE '%$query%'";
   $start_from=($pageno-1)*$RECORDS_PER_PAGE ;
-  $userdata_query="SELECT * FROM user WHERE $term LIKE '%$query%' LIMIT $start_from, $RECORDS_PER_PAGE";
+  $criminaldata_query="SELECT * FROM criminal WHERE $term LIKE '%$query%' LIMIT $start_from, $RECORDS_PER_PAGE";
   $prevURL = '?entry='.($pageno-1)."&term=$term&query=$query";
   $nextURL = '?entry='.($pageno+1)."&term=$term&query=$query";
  }
  else{ 
-  $totalrecordsSQL = "SELECT * FROM user";
+  $totalrecordsSQL = "SELECT * FROM criminal";
   $start_from=($pageno-1)*$RECORDS_PER_PAGE ;
-  $userdata_query="SELECT * FROM user LIMIT $start_from, $RECORDS_PER_PAGE";
+  $criminaldata_query="SELECT * FROM criminal LIMIT $start_from, $RECORDS_PER_PAGE";
   $a=$pageno-1;$b=$pageno+1;
   $prevURL = "?entry=$a";
   $nextURL = "?entry=$b";
 }
 
-$userdata=$conn->query($userdata_query);
+$criminaldata=$conn->query($criminaldata_query);
 $totalrecords=$conn->query($totalrecordsSQL);
 $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
 
@@ -44,7 +44,7 @@ $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Search</title>
+    <title>Search Records - CrimeLogs</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
@@ -69,8 +69,8 @@ $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
         $('#searchinput').val('<?php echo $_GET["query"]; ?>');
         <?php endif; ?>
         $('#dtBasicExample tbody tr').click( function() {
-          var userid = $(this).attr('data-userid');
-          window.location = "update.php?id="+userid;
+          var criminalid = $(this).attr('data-criminalid');
+          window.location = "update.php?id="+criminalid;
         })
         $('.togglepanel').click(function(){
          $('.sidepanel').show();
@@ -83,11 +83,11 @@ $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
  </head>
   <body>
   <div class="sidepanel">
-      <img src="https://i.pinimg.com/originals/51/ea/39/51ea39531ba05d624b256c80099a4b95.png" />
+      <img src="mahapol.png" />
       <ul>
-        <li><a href="/form">Add Entry</a></li>
-        <li><a href="/form/search.php?term=1">Search Entry</a></li>
-        <li><a href="/form/logout.php">Log Out</a></li>
+        <li><a href="/crimelogs"><i class="fa fa-address-book"></i> Add Entry</a></li>
+        <li><a href="/crimelogs/search.php?term=1"><i class="fa fa-search"></i> Search Entry</a></li>
+        <li><a href="/crimelogs/logout.php"><i class="fa fa-times-circle"></i> Log Out</a></li>
         <li><a href="#" class="closepanel">Close &times;</a></li>
       </ul>
     </div>
@@ -117,7 +117,7 @@ $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
     <button class="btn btn-search" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
   </div>
 </div>
-</form>
+</crimelogs>
 
   <table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive" cellspacing="0" width="100%">
   <thead>
@@ -166,10 +166,10 @@ $totalpage = ceil($totalrecords->num_rows/$RECORDS_PER_PAGE);
   <tbody>
   <?php 
 
-    if ($userdata->num_rows > 0) {
+    if ($criminaldata->num_rows > 0) {
     $i = 0;
-    while($row = $userdata->fetch_assoc()) {
-        echo '<tr data-userid="'.$row['userid'].'" title="Edit Entry">';
+    while($row = $criminaldata->fetch_assoc()) {
+        echo '<tr data-criminalid="'.$row['criminalid'].'" title="Edit Entry">';
         echo '<td>'.(++$i+($RECORDS_PER_PAGE*($pageno-1))).'</td>';
         echo '<td>'.$row['name'].'</td>';
         echo '<td>'.$row['surname'].'</td>';

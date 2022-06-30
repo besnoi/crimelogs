@@ -2,10 +2,10 @@
 // Start the session
 session_start();
 if(!$_SESSION['loggedIn']){
-  header('Location: /form/login.php');
+  header('Location: /crimelogs/login.php');
 }
 ?>
-<!--TODO User doesn't exist Error!-->
+<!--TODO criminal doesn't exist Error!-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,11 +44,11 @@ if(!$_SESSION['loggedIn']){
   </head>
   <body>
   <div class="sidepanel">
-      <img src="https://i.pinimg.com/originals/51/ea/39/51ea39531ba05d624b256c80099a4b95.png" />
+      <img src="mahapol.png" />
       <ul>
-        <li><a href="/form">Add Entry</a></li>
-        <li><a href="/form/search.php?term=1">Search Entry</a></li>
-        <li><a href="/form/logout.php">Log Out</a></li>
+        <li><a href="/crimelogs"><i class="fa fa-address-book"></i> Add Entry</a></li>
+        <li><a href="/crimelogs/search.php?term=1"><i class="fa fa-search"></i> Search Entry</a></li>
+        <li><a href="/crimelogs/logout.php"><i class="fa fa-times-circle"></i> Log Out</a></li>
         <li><a href="#" class="closepanel">Close &times;</a></li>
       </ul>
     </div>
@@ -64,8 +64,8 @@ if (!isset($_GET['id']))
 
 $record_id = $_GET['id'];
 
-if(isset($_POST['deleteuser'])){
-    $sql_delete = "DELETE FROM `user` WHERE userid = $record_id";
+if(isset($_POST['deletecriminal'])){
+    $sql_delete = "DELETE FROM `criminal` WHERE criminalid = $record_id";
     
     if ($conn->query($sql_delete) === TRUE) {
         echo '<div class="alert alert-success" role="alert">Record Deleted Successfully</div>';
@@ -74,7 +74,7 @@ if(isset($_POST['deleteuser'])){
       }
 }
 
-if(isset($_POST['userform'])){
+if(isset($_POST['criminalform'])){
 
 
     $firstname = $_POST['firstname'];
@@ -90,7 +90,7 @@ if(isset($_POST['userform'])){
     $crime_year = $_POST['crime_year'];
     $registration_date = $_POST['registration_date'];
   
-    $sql = "UPDATE `user` SET `name`='$firstname',`surname`='$lastname',`bankacc`='$bankno',`mobbank`='$bankmob',`mobno`='$mobno',`email`='$email',`address`='$address',`panno`='$panno',`adhaar`='$aadhar',`crime_number`='$crime_number',`crime_year`='$crime_year',`registration_date`='$registration_date' WHERE `userid`=$record_id";
+    $sql = "UPDATE `criminal` SET `name`='$firstname',`surname`='$lastname',`bankacc`='$bankno',`mobbank`='$bankmob',`mobno`='$mobno',`email`='$email',`address`='$address',`panno`='$panno',`adhaar`='$aadhar',`crime_number`='$crime_number',`crime_year`='$crime_year',`registration_date`='$registration_date' WHERE `criminalid`=$record_id";
     
     if ($conn->query($sql) === TRUE) {
       echo '<div class="alert alert-success" role="alert">Record Updated Successfully</div>';
@@ -101,16 +101,16 @@ if(isset($_POST['userform'])){
   
   }
 
-if(!isset($_POST['deleteuser'])){
-  $userdata_query = "SELECT * FROM `user` WHERE `userid` = " . $record_id;
-  $userdata = $conn->query($userdata_query);
-  $row = $userdata->fetch_assoc();
+if(!isset($_POST['deletecriminal'])){
+  $criminaldata_query = "SELECT * FROM `criminal` WHERE `criminalid` = " . $record_id;
+  $criminaldata = $conn->query($criminaldata_query);
+  $row = $criminaldata->fetch_assoc();
 }
   
 
 ?>
 
-    <?php if(!isset($_POST['deleteuser'])): ?>
+    <?php if(!isset($_POST['deletecriminal'])): ?>
     <form style="  padding: 20px 15px 20px 15px;" action="update.php<?php 
 if (isset($_GET['id'])) echo '?id='.$_GET['id']?>" method="POST" >
       <div class="form-group row">
@@ -164,7 +164,7 @@ if (isset($_GET['id'])) echo '?id='.$_GET['id']?>" method="POST" >
       <div class="form-group row">
         <label for="text8" class="col-4 col-form-label">Aadhar Number</label> 
         <div class="col-8">
-          <input id="text8" name="aadhar" type="text" class="form-control" value="<?php echo $row['userid']?>">
+          <input id="text8" name="aadhar" type="text" class="form-control" value="<?php echo $row['criminalid']?>">
         </div>
       </div> 
       <div class="form-group row">
@@ -193,11 +193,11 @@ if (isset($_GET['id'])) echo '?id='.$_GET['id']?>" method="POST" >
       </div>
       <div class="form-group row">
         <div class="offset-4 col-8">
-          <input name="userform" type="submit" class="btn btn-primary" value="Update">
-          <input name="deleteuser" type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');">
+          <input name="criminalform" type="submit" class="btn btn-primary" value="Update">
+          <input name="deletecriminal" type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');">
         </div>
       </div>
-    </form>
+    </crimelogs>
     <?php endif; ?>
     </div>
     </body>
